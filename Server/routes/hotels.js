@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Hotel = require('../models/Hotel');
-const { createHotel , updateHotel, deleteHotel, getOneHotel, getAllHotels, getHotelCountByCity, getHotelCountByType  } = require('../controllers/hotel');
+const { createHotel , updateHotel, deleteHotel, getOneHotel, 
+    getAllHotels, getHotelCountByCity, getHotelCountByType, getHotelRooms } = require('../controllers/hotel');
 const { verifyAdmin } = require('../utils/verifyToken');
 
 
@@ -17,7 +18,7 @@ router.delete('/:id', verifyAdmin , deleteHotel);
 router.get('/:id', getOneHotel);
 //Get All Hotels
 router.get('/', getAllHotels);
-
+router.get('/room/:id', getHotelRooms);
 
 
 module.exports = router;
