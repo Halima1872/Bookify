@@ -4,6 +4,10 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const corsConfig = {
+    origin: 'http://localhost:5173',
+    credentials: true,
+    };
 
 //import routes
 const authRoute = require('./routes/auth');
@@ -23,7 +27,7 @@ const connect = async() =>{
 }
 
 //middleware
-app.use(cors())
+app.use(cors(corsConfig));
 app.use(cookieParser());
 app.use(express.json());
 
