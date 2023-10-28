@@ -3,7 +3,17 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user,dispatch } = useContext(AuthContext);
+  const handleLogin = () => {
+    window.location.href = "/login";
+  }
+  const handleLogout = () => {
+    window.location.href = "/";
+    dispatch({ type: "LOGOUT" }) ;
+  }
+  const handleRegister = () => {
+    window.location.href = "/register";
+  }
 
   return (
     <div className="navbar">
@@ -11,10 +21,15 @@ const Navbar = () => {
         <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
           <span className="logo">Bookify</span>
         </Link>
-        {user ? user.username : (
+        {user ? <div className="navItems">
+        Welcome, {user}
+            <button className="navButton" onClick={handleLogout} >Logout</button>
+          </div>
+        
+       : (
           <div className="navItems">
-            <button className="navButton">Register</button>
-            <button className="navButton">Login</button>
+            <button className="navButton" onClick={handleRegister}>Register</button>
+            <button className="navButton" onClick={handleLogin}>Login</button>
           </div>
         )}
       </div>

@@ -1,13 +1,22 @@
 import { createContext, useReducer } from "react";
 import PropTypes from "prop-types";
 
+const d = new Date();
+d.setDate(d.getDate() + 3);
+
 const INITIAL_STATE = {
   city: undefined,
-  dates: [],
+  
+  dates: [
+    {
+      startDate: new Date(),
+      endDate: d,
+    },
+  ],
   options: {
     adult: undefined,
     children: undefined,
-    room: undefined,
+    room: 3,
   },
 };
 

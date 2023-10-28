@@ -24,7 +24,8 @@ module.exports.login = async(req, res, next) => {
         if(!user) return next(createError(404, "User not found"));
         const isPasswordCorrect = await bcrypt.compare(password, user.password);
         if(!isPasswordCorrect) return next(createError(400, "Invalid credentials"));
-        const token = jwt.sign({isAdmin:user.isAdmin, id: user._id}, process.env.JWT_SECRET, {expiresIn: "1h"});
+        const token = jwt.sign({isAdmin:user.isAdmin, id: user._id}, 
+            process.env.JWT_SECRET, {expiresIn: "1h"});
         const { password: pass,isAdmin, ...data } = user._doc;
         res.cookie("access_token",token,{
             httpOnly : true

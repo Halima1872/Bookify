@@ -1,17 +1,20 @@
 import useFetch from "../../hooks/useFetch";
 import "./featuredProperties.css";
+import { Link} from 'react-router-dom';
 
 const FeaturedProperties = () => {
-  const { data, loading } = useFetch("/api/hotels?featured=true&limit=4");
 
+  const { data, loading } = useFetch("/api/hotels?featured=true&limit=4");
+  
   return (
     <div className="fp">
       {loading ? (
-        "Loading"
+        "Loading" 
       ) : (
         <>
           {data.map((item) => (
-            <div className="fpItem" key={item._id}>
+            <Link to={`/hotels/${item._id}`} style={{textDecoration:"none" , color:"black"}  } key={item._id}>
+            <div className="fpItem"  >
               <img
                 src={item.photos[0]}
                 alt=""
@@ -26,6 +29,7 @@ const FeaturedProperties = () => {
               <span className="fpPrice">Starting from <b>₹{item.cheapestPrice}</b></span>
               
             </div>
+            </Link>
           ))}
         </>
       )}
